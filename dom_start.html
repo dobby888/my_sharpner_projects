@@ -31,10 +31,16 @@
    </div>
   </div>
   <script>
-    var li=document.getElementsByTagName('li');
-    li[4].style.color='coral';
-    for(var i=0;i<li.length;i++){
-      li[i].style.backgroundColor='lightblue';
+    var seconditem=document.querySelector('.list-group-item:nth-child(2)');
+    seconditem.style.backgroundColor='green';
+    var thirditem=document.querySelector('.list-group-item:nth-child(3)');
+    thirditem.style.color='transparent';
+
+    var items=document.querySelectorAll('.list-group-item');
+    items[1].style.color='green';
+    var odd=document.querySelectorAll('li:nth-child(odd)');//if .list-group-item is used then item 5 will be excluded and if li tag if used then item 5 is also included
+    for(var i=0;i<odd.length;i++){
+      odd[i].style.backgroundColor='green';
     }
   </script>
 
