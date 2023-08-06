@@ -25,7 +25,8 @@
     <div id="main" class="card card-body">
       <h2 class="title">Add Items</h2>
       <form id="addForm" class="form-inline mb-3">
-        <input type="text" class="form-control mr-2" id="item">
+        <input type="text" class="form-control mr-2" id="item" placeholder="add items">
+        <input type="text" class="form-control mr-2" id="itemdescription" placeholder="add description">
         <input type="submit" class="btn btn-dark" value="Submit">
       </form>
       <h2 class="title">Items</h2>
@@ -43,12 +44,14 @@
     //DELETE AND EDIT FUNCTIONALITY
     var form=document.getElementById('addForm');
     var itemlist=document.getElementById('items');
+    var filter=document.getElementById('filter');
 
     //form submit events
     form.addEventListener('submit', additem);
     //del event
     itemlist.addEventListener('click', removeitem);
-   
+    //filter event
+    filter.addEventListener('keyup',filteritems);
 
     //add item
     function additem(e){
@@ -58,14 +61,15 @@
       
       //get input value
       var newitem=document.getElementById('item').value;//upon adding .value the value entered in the form will be added to the list
-
+      var itemdecription=document.getElementById('itemdescription').value;
       //create new li ele
       var li=document.createElement('li');
       //add class
       li.className='list-group-item';
       //console.log(li)
       //add text node with input value
-      li.appendChild(document.createTextNode(newitem));
+      li.appendChild(document.createTextNode(newitem+' '+itemdecription));
+
 
       //create del button ele
       var del=document.createElement('button');
@@ -103,7 +107,23 @@
       }
     }
 
-    
+    function filteritems(e){
+      //convert text to lowerase to prevent mismatch
+      var text=e.target.value.toLowerCase();//search in item lister section
+      //get all li's
+      var items=itemlist.getElementsByTagName('li');
+      //console.log(items)//upto this the group items is an html collection but now we need to convert it into an array
+      //convert to an array
+      Array.from(items).forEach(function(item){//items is different from item
+        var itemname=item.firstChild.textContent;
+        if(itemname.toLowerCase().indexOf(text)!=-1){//if its a match then it would not be equal to -1
+          item.style.display='block';
+        }
+        else{
+          item.style.display='none';
+        }
+      });
+    }  
   </script>
 </body>
 </html>
