@@ -451,6 +451,11 @@ function onsubmit(e){
       userlist.appendChild(li);//appending li to userlist ele; append function adds ele/content to an existing ele in html
       //overall the above code takes the values entered by user as name and email,combines them into a string,creates a new list item and adds this list item to userlist in the html document
       //appendchild adds a new html ele as a child of an existing html ele
+      
+      //add fields input to local storage
+      localStorage.setItem('name',nameinput.value);
+      localStorage.setItem('email',emailinput.value);
+      
       //claer fields
       nameinput.value='';//reset the input fields to empty
       emailinput.value='';
@@ -464,6 +469,14 @@ const nameinput=document.querySelector('#name');
 const emailinput=document.querySelector('#email');
 const msg=document.querySelector('.msg');
 const userlist=document.querySelector('#users');
+
+var users=JSON.parse(localStorage.getItem('users')) || [];
+
+users.forEach((user)=>{
+  var li=document.createElement('li');
+  li.textContent`${user.name}:${user.email}`;
+  userlist.appendChild(li);
+});
 
 myform.addEventListener('submit',onsubmit);//upon clicking submit button onsubmit function takes place
 
@@ -479,25 +492,38 @@ function onsubmit(e){
      setTimeout(()=>msg.remove(),3000)//error msg goes away after 3 seconds
     }
     else{
-      //console.log('success')
-      const li=document.createElement('li');//creates a new list item using tag names
-      li.appendChild(document.createTextNode(`${nameinput.value}:${emailinput.value}`));//DONOT FORGET to use backticks(`) instead of single quotes(') while using $
-      //createElment creates a new html ele and createTextNode adds text content into that ele dynamically(during runtime)
+      //adding the user input to an object
+      var user={
+        name:nameinput.value,
+        email:emailinput.value,
+      };
+      users.push(user);//pushing new user to users array
+      localStorage.setItem('users',JSON.s(users));//converting array/object into string
+      var li=document.createElement('li');//adding new user to userlist
+      li.textContent=`${user.name}:${user.email}`;
       userlist.appendChild(li);//appending li to userlist ele; append function adds ele/content to an existing ele in html
       //overall the above code takes the values entered by user as name and email,combines them into a string,creates a new list item and adds this list item to userlist in the html document
       //appendchild adds a new html ele as a child of an existing html ele
       
-      //add fields input to local storage
-      localStorage.setItem('name',nameinput.value);
-      localStorage.setItem('email',emailinput.value);
-
-      //claer fields
       nameinput.value='';//reset the input fields to empty
       emailinput.value='';
     }
-
   }
 
+  //localStorage.setItem('obj',JSON.stringify(obj));
 
+  let obj={
+    name:"sree",
+    age:24
+  };//storing memory in an object
+  
+  var obj_str=JSON.stringify(obj);//converting the obj into string
+  
+  localStorage.setItem('obj',obj_str);//storing the values  in the obj in the string then storing them in the local storage
+  
+  var str_obj=JSON.parse(localStorage.getItem('obj'));//now convert the memory of the local storage object string back to object
+  //console.log(str_obj)
+
+var 
 
 
