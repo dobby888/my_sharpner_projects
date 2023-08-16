@@ -1,112 +1,113 @@
-/*
+
 //GETELEMENTBYID
-    var headertitle=document.getElementById('header-title');
-    var header=document.getElementById('main-header');
+var headertitle=document.getElementById('header-title');
+var header=document.getElementById('main-header');
 
-    console.log(headertitle)
-    headertitle.textContent='hello';
-    headertitle.innerText='good bye';//overrides the above
-    //
-    console.log(headertitle.innerText);//even after style="display:none" textContent disregards the span and displays item lister 123 in console page (only) but innertext removes the 123 considering the span
-    //innertext pays attention to the style and textcontent doesnt
-    headertitle.innerHTML='<h3>hello</h3>'//doesnt changes the hello to h3 instead it places h3 hello inside h1
-    //we can use any selectors for the above operations instead of getelementbyid
-    headertitle.style.borderBottom='solid 3px #000';//border line under the header title only
-    header.style.borderBottom='solid 3px #000';//border line under the full actual main header
-    
-
-
-    //GETELEMENTSBYCLASSNAME
-    
-    var items=document.getElementsByClassName('list-group-item');
-    console.log(items)//html collection like an array so array poperations could be used
-    console.log(items[1]);
-    items[1].textContent='hello 2';
-    items[1].style.fontWeight='bold';
-    items[1].style.backgroundColor='yellow';
-
-    items.style.backgroundColor='#f4f4f4';//it doesnt work cuz its an html collection or an array so we have to loop through the items list
-
-    for(var i=0;i<items.length;i++){
-      items[i].style.backgroundColor='blue';//doesnt add to ele with different class name or ele without a class name
-    }
+console.log(headertitle)
+headertitle.textContent='hello';
+headertitle.innerText='good bye';//overrides the above
+//
+console.log(headertitle.innerText);//even after style="display:none" textContent disregards the span and displays item lister 123 in console page (only) but innertext removes the 123 considering the span
+//innertext pays attention to the style and textcontent doesnt
+headertitle.innerHTML='<h3>hello</h3>'//doesnt changes the hello to h3 instead it places h3 hello inside h1
+//we can use any selectors for the above operations instead of getelementbyid
+headertitle.style.borderBottom='solid 3px #000';//border line under the header title only
+header.style.borderBottom='solid 3px #000';//border line under the full actual main header
 
 
-    //GETELEMENTSBYTAGNAME
-  
-    var li=document.getElementsByTagName('li');
-    console.log(li)//html collection like an array so array poperations could be used
-    console.log(li[1]);
-    li[1].textContent='hello 2';
-    li[1].style.fontWeight='bold';
-    li[1].style.backgroundColor='yellow';
 
-    items.style.backgroundColor='#f4f4f4';//it doesnt work cuz its an html collection or an array so we have to loop through the items list
+//GETELEMENTSBYCLASSNAME
 
-    for(var i=0;i<li.length;i++){
-      li[i].style.backgroundColor='blue';//this applies to newly added ele without classname also cux it goes by the tag name not by the class name
+var items=document.getElementsByClassName('list-group-item');
+console.log(items)//html collection like an array so array poperations could be used
+console.log(items[1]);
+items[1].textContent='hello 2';
+items[1].style.fontWeight='bold';
+items[1].style.backgroundColor='yellow';
 
-    }
- 
-  //QUERYSELECTOR:used for only item(first one)
-  
-  var header=document.querySelector('#main-header')//bothtag and class
-  header.style.borderBottom='solid 3px blue';
+items.style.backgroundColor='#f4f4f4';//it doesnt work cuz its an html collection or an array so we have to loop through the items list
 
-  var input=document.querySelector('input');
-  input.value='hello world'
+for(var i=0;i<items.length;i++){
+  items[i].style.backgroundColor='blue';//doesnt add to ele with different class name or ele without a class name
+}
 
-  var submit=document.querySelector('input[type="submit"]');
-  submit.value='send'//submit button changed to send  
-  var item=document.querySelector('.list-group-item');
-  item.style.color='red'//first item color=red
 
-  var lastitem=document.querySelector('.list-group-item:last-child');
-  lastitem.style.color='blue'//dont forget to remove item 5 before this code
-   
-  var seconditem=document.querySelector('.list-group-item:nth-child(2)');
-  seconditem.style.color='coral';
-   
+//GETELEMENTSBYTAGNAME
 
-  //QUERYSELECTORALL
-  var titles=document.querySelectorAll('.title');//for classes,id's and tag's also
-  console.log(titles);//nodelist of array===>array operations can be used
-  titles[0].textContent='hello';
+var li=document.getElementsByTagName('li');
+console.log(li)//html collection like an array so array properties could be used
+console.log(li[1]);
+li[1].textContent='hello 2';
+li[1].style.fontWeight='bold';
+li[1].style.backgroundColor='yellow';
 
-  var odd=document.querySelectorAll('li:nth-child(odd)');
+items.style.backgroundColor='#f4f4f4';//it doesnt work cuz its an html collection or an array so we have to loop through the items list
 
-  for(var i=0;i<odd.length;i++){
-    odd[i].style.backgroundColor='pink';
-  }
+for(var i=0;i<li.length;i++){
+  li[i].style.backgroundColor='blue';//this applies to newly added ele without classname also cux it goes by the tag name not by the class name
 
-  var even=document.querySelectorAll('li:nth-child(even)');
+}
 
-  for(var i=0;i<even.length;i++){
-    even[i].style.backgroundColor='lightblue';
-  }
+//QUERYSELECTOR:used for only item(first one)
+
+var header=document.querySelector('#main-header')//both tag and class
+header.style.borderBottom='solid 3px blue';
+
+var input=document.querySelector('input');
+input.value='hello world'
+
+var submit=document.querySelector('input[type="submit"]');
+submit.value='send'//submit button changed to send  
+var item=document.querySelector('.list-group-item');
+item.style.color='red'//first item color=red
+
+var lastitem=document.querySelector('.list-group-item:last-child');
+lastitem.style.color='blue'//dont forget to remove item 5 before this code
+
+var seconditem=document.querySelector('.list-group-item:nth-child(2)');
+seconditem.style.color='coral';
+
+
+//QUERYSELECTORALL
+
+var titles=document.querySelectorAll('.title');//for classes,id's and tag's also
+console.log(titles);//nodelist of array===>array operations can be used
+titles[0].textContent='hello';
+
+var odd=document.querySelectorAll('li:nth-child(odd)');
+
+for(var i=0;i<odd.length;i++){
+odd[i].style.backgroundColor='pink';
+}  
+
+var even=document.querySelectorAll('li:nth-child(even)');
+
+for(var i=0;i<even.length;i++){
+even[i].style.backgroundColor='lightblue';
+}
 
 
 //div is the parent of div,form is the sibling of h2(both of them are on the same level)
 
 //TRAVERSING THE DOM
+
 var itemlist=document.querySelector('#items');
 //parentNode
-//console.log(itemlist.parentNode)//div is the parent node of the itemslist
-//itemlist.parentNode.style.backgroundColor='pink';
-//console.log(itemlist.parentNode.parentNode);//container is teh parentnode of div
+console.log(itemlist.parentNode)//div is the parent node of the itemslist
+itemlist.parentNode.style.backgroundColor='pink';
+console.log(itemlist.parentNode.parentNode);//container is teh parentnode of div
 
 //parentelement
-//console.log(itemlist.parentElement)//div is the parent node of the itemslist
-//itemlist.parentElement.style.backgroundColor='lightblue';
-//console.log(itemlist.parentElement.parentElement);//container is teh parentnode of div
+console.log(itemlist.parentElement)//div is the parent node of the itemslist
+itemlist.parentElement.style.backgroundColor='lightblue';
+console.log(itemlist.parentElement.parentElement);//container is teh parentnode of div
 //parentnode and parentelement are almost similar to each other
 
 //childnode
-//console.log(itemlist.childNodes);//textnode represents space like line breaks=>nodelist 
-
-//console.log(itemlist.children);//excludes all the line breaks or textnodes=>html collection
-//console.log(itemlist.children[1]);
-//itemlist.children[1].style.backgroundColor='yellow';
+console.log(itemlist.childNodes);//textnode represents space like line breaks=>nodelist 
+console.log(itemlist.children);//excludes all the line breaks or textnodes=>html collection
+console.log(itemlist.children[1]);
+itemlist.children[1].style.backgroundColor='yellow';
 
 
 //firstchild
@@ -183,7 +184,7 @@ var helloWordText=document.createTextNode('HEllo word');
 var newListItem=document.createElement('li');
 newListItem.appendChild(helloWordText);
 itemsList.insertBefore(newListItem,itemsList.firstElementChild);    
-*/
+
 
 
 //DELETE AND EDIT FUNCTIONALITY
@@ -224,7 +225,7 @@ function additem(e){
   del.appendChild(document.createTextNode('X'));
 
   //append button to li
-  li.appendChild(del);delete
+  li.appendChild(del);
   
 
   var edit=document.createElement('button');

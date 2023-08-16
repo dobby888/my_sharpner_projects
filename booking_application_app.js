@@ -377,7 +377,17 @@ function onSubmit(e) {
   }
 }
 */
-/*
+
+
+
+
+
+//MY NOTES//
+
+
+
+
+
 console.log(window)
 
 window.alert(1)//alert(1)
@@ -394,7 +404,7 @@ console.log(document.querySelector('h1'))//h1 is a tag name so no need of '.'
 
 //MULTIPLE ELEMENT
 
-const items=document.querySelectorAll('.item');//node list s similar to arrays so we can use array methods on this
+const items=document.querySelectorAll('.item');//node lists similar to arrays so we can use array methods on this
 //generally query selectors are prefered over get element methods
 console.log(document.getElementsByClassName('item'))//gives a html collection not a node list
 
@@ -462,68 +472,72 @@ function onsubmit(e){
     }
 
   }
-*/
 
-const myform=document.querySelector('#my-form');
-const nameinput=document.querySelector('#name');
-const emailinput=document.querySelector('#email');
-const msg=document.querySelector('.msg');
-const userlist=document.querySelector('#users');
 
-var users=JSON.parse(localStorage.getItem('users')) || [];
+  //STORAGE METHODS IN AJVASCRIPT//
 
-users.forEach((user)=>{
-  var li=document.createElement('li');
-  li.textContent`${user.name}:${user.email}`;
-  userlist.appendChild(li);
-});
 
-myform.addEventListener('submit',onsubmit);//upon clicking submit button onsubmit function takes place
+  
+  const myform=document.querySelector('#my-form');
+  const nameinput=document.querySelector('#name');
+  const emailinput=document.querySelector('#email');
+  const msg=document.querySelector('.msg');
+  const userlist=document.querySelector('#users');
 
-function onsubmit(e){
-    e.preventDefault();
-    console.log(nameinput.value)//adding .value will give u the value u entered in the web page
-    //if .value is not added then it will be giving u the actual input <input type="text" id="name">
-    if(nameinput.value==="" || emailinput.value===""){
-      alert('please enter fields');//alert msg pops up
-     msg.classList.add('error');//error msg appears on the web page itself
-     msg.innerHTML='please enter all fields';//text in error msg
+  var users=JSON.parse(localStorage.getItem('users')) || [];
 
-     setTimeout(()=>msg.remove(),3000)//error msg goes away after 3 seconds
+  users.forEach((user)=>{
+    var li=document.createElement('li');
+    li.textContent`${user.name}:${user.email}`;
+    userlist.appendChild(li);
+  });
+
+  myform.addEventListener('submit',onsubmit);//upon clicking submit button onsubmit function takes place
+
+  function onsubmit(e){
+      e.preventDefault();
+      console.log(nameinput.value)//adding .value will give u the value u entered in the web page
+      //if .value is not added then it will be giving u the actual input <input type="text" id="name">
+      if(nameinput.value==="" || emailinput.value===""){
+        alert('please enter fields');//alert msg pops up
+      msg.classList.add('error');//error msg appears on the web page itself
+      msg.innerHTML='please enter all fields';//text in error msg
+
+      setTimeout(()=>msg.remove(),3000)//error msg goes away after 3 seconds
+      }
+      else{
+        //adding the user input to an object
+        var user={
+          name:nameinput.value,
+          email:emailinput.value,
+        };
+        users.push(user);//pushing new user to users array
+        localStorage.setItem('users',JSON.s(users));//converting array/object into string
+        var li=document.createElement('li');//adding new user to userlist
+        li.textContent=`${user.name}:${user.email}`;
+        userlist.appendChild(li);//appending li to userlist ele; append function adds ele/content to an existing ele in html
+        //overall the above code takes the values entered by user as name and email,combines them into a string,creates a new list item and adds this list item to userlist in the html document
+        //appendchild adds a new html ele as a child of an existing html ele
+        
+        nameinput.value='';//reset the input fields to empty
+        emailinput.value='';
+      }
     }
-    else{
-      //adding the user input to an object
-      var user={
-        name:nameinput.value,
-        email:emailinput.value,
-      };
-      users.push(user);//pushing new user to users array
-      localStorage.setItem('users',JSON.s(users));//converting array/object into string
-      var li=document.createElement('li');//adding new user to userlist
-      li.textContent=`${user.name}:${user.email}`;
-      userlist.appendChild(li);//appending li to userlist ele; append function adds ele/content to an existing ele in html
-      //overall the above code takes the values entered by user as name and email,combines them into a string,creates a new list item and adds this list item to userlist in the html document
-      //appendchild adds a new html ele as a child of an existing html ele
-      
-      nameinput.value='';//reset the input fields to empty
-      emailinput.value='';
-    }
-  }
 
-  //localStorage.setItem('obj',JSON.stringify(obj));
+    //localStorage.setItem('obj',JSON.stringify(obj));
 
-  let obj={
-    name:"sree",
-    age:24
-  };//storing memory in an object
-  
-  var obj_str=JSON.stringify(obj);//converting the obj into string
-  
-  localStorage.setItem('obj',obj_str);//storing the values  in the obj in the string then storing them in the local storage
-  
-  var str_obj=JSON.parse(localStorage.getItem('obj'));//now convert the memory of the local storage object string back to object
-  //console.log(str_obj)
+    let obj={
+      name:"sree",
+      age:24
+    };//storing memory in an object
+    
+    var obj_str=JSON.stringify(obj);//converting the obj into string
+    
+    localStorage.setItem('obj',obj_str);//storing the values  in the obj in the string then storing them in the local storage
+    
+    var str_obj=JSON.parse(localStorage.getItem('obj'));//now convert the memory of the local storage object string back to object
+    //console.log(str_obj)
 
-var 
+  
 
 

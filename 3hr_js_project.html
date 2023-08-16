@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="3hr_js_project.css">
+</head>
+<body>
+    <div class="container">
+        <form id="expense_form">
+        <label for="expense_amount">Choose_expense_amount:</label>
+        <input type="number" id="expense_amount" name="expense_amount"><br><br>
+        <label for="description">Choose_a_description:</label>
+        <input type="text" id="description" name="description"><br><br>
+        <label for="category">Choose_a_category:</label>
+        <select id="category" name="category">
+            <option value="education">Education</option>
+            <option value="food">Food</option>
+            <option value="medical">Medical</option>
+            <option value="family">Family</option>
+            <option value="rent">Rent</option>
+            <option value="transport">Transport</option>
+            <option value="entertainment">Entertainment</option>
+        </select><br><br>
+        <button type="submit">Add Expense</button>
+        </form>
+        <ul id="expenses_list" class="list-group mt-3"></ul>
+    </div>    
+    <script>
+        // Get references to elements
+let expenseform=document.getElementById('expense_form');
+let amount=document.getElementById('expense_amount');
+let description=document.getElementById('description');
+let category=document.getElementById('category');
+let expenseslist=document.getElementById('expenses_list');
+expenseform.addEventListener('submit', addExpense);
+function addExpense(e){
+    e.preventDefault();
+        if(amount.value==="" || description.value==="" || category.value===""){
+        alert('Please enter all fields.');
+    } 
+    else{
+        let expense={
+            amount:amount.value,
+            description:description.value,
+            category:category.value,
+        };
+        let storedExpenses=JSON.parse(localStorage.getItem('expenses')) || [];
+        storedExpenses.push(expense);
+        localStorage.setItem('expenses',JSON.stringify(storedExpenses));
+        addExpenseToUI(expense);
+        amount.value='';
+        description.value='';
+        category.value='';
+    }
+}
+function addExpenseToUI(expense){
+    let li=document.createElement('li');
+    li.className='list-group-item';
+    li.textContent=`${expense.amount}: ${expense.description}: ${expense.category}`;
+    let deleteBtn=document.createElement('button');
+    deleteBtn.className='btn btn-danger btn-sm float-right delete';
+    deleteBtn.textContent='X';
+    let editBtn=document.createElement('button');
+    editBtn.className='btn btn-primary btn-sm float-right edit';
+    editBtn.textContent='EDIT';
+    li.appendChild(deleteBtn);
+    li.appendChild(editBtn);
+    expenseslist.appendChild(li);
+}
+expenseslist.addEventListener('click',function(e){
+    if(e.target.classList.contains('delete')){
+        if(confirm('Are you sure you want to delete this expense?')){
+            let li=e.target.parentElement;
+            expenseslist.removeChild(li);            
+            let expenseText=li.textContent.trim();            
+            let storedExpenses=JSON.parse(localStorage.getItem('expenses'));
+            let updatedExpenses=storedExpenses.filter(expense=>expense!==expenseText);
+            localStorage.setItem('expenses',JSON.stringify(updatedExpenses));
+        }
+    } 
+    else if(e.target.classList.contains('edit')){
+        let li=e.target.parentElement;
+        let expenseText=li.textContent.trim();        
+        amount.value=amountText;
+        storedExpenses=JSON.parse(localStorage.getItem('expenses'));
+        let updatedExpenses=storedExpenses.filter(expense=>expense!==expenseText);
+        localStorage.setItem('expenses',JSON.stringify(updatedExpenses));
+        // Remove the expense from UI
+        expenseslist.removeChild(li);
+    }
+});
+
+    </script>
+</body>
+</html>
