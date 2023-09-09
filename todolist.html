@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>expense-tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        #expenseform {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select {
+            height: 36px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            background-color: black;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expense Tracker:</h1>
+    <form id="expenseform">
+        <input type="text" class="form-control" id="filter" placeholder="Search expenses...">
+        <label for="amount">Expense Amount:</label>
+        <input type="number" id="amount" name="amount"><br><br>
+        <label for="description">Choose Description:</label>
+        <input type="text" id="description" name="description"><br><br>
+        <label for="category">Choose a Category:</label>
+        <select id="category" name="category">
+            <option value="entertainment">Entertainment</option>
+            <option value="education">Education</option>
+            <option value="food">Food</option>
+            <option value="rent">Rent</option>
+            <option value="travel">Travelling</option>
+            <option value="loan">Loan</option>
+            <option value="donation">Donation</option>
+        </select><br><br>
+        <button type="submit">Add Expense</button>
+        <ul id="expenses"></ul>
+    </form>
+    <script>
+        var form=document.querySelector('#expenseform');
+        var amtinput=document.querySelector('#amount');
+        var desinput=document.querySelector('#description');
+        var catinput=document.querySelector('#category');
+        var expenseslist=document.querySelector('#expenses');
+        var expenses=JSON.parse(localStorage.getItem('expenses')) || [];
+        form.addEventListener('submit',onsubmit);
+        function onsubmit(e){
+            e.preventDefault();
+            if(amtinput.value==="" || desinput.value==="" || catinput.value===""){
+                alert("please enter all fields");
+            }
+            else{
+                var newexpense={
+                    amount:amtinput.value,
+                    description:desinput.value,
+                    category:catinput.value
+                };
+                expenses.push(newexpense);
+                localStorage.setItem('expenses',JSON.stringify(expenses));
+                var li=document.createElement('li');
+                li.textContent=`${newexpense.amount}:${newexpense.description}:${newexpense.category}`;
+                let deletebtn=document.createElement('button');
+                deletebtn.className='delete';
+                deletebtn.textContent='X';
+                let editbtn=document.createElement('button');
+                editbtn.className='edit';
+                editbtn.textContent='EDIT';
+                li.appendChild(deletebtn);
+                li.appendChild(editbtn);
+                expenseslist.appendChild(li);
+                amtinput.value='';
+                desinput.value='';
+                catinput.value='';
+            }
+        }
+        expenseslist.addEventListener('click',function(e){
+            if(e.target.classList.contains('delete')){
+                if(confirm('delete?')){
+                    let li=e.target.parentElement;
+                    expenseslist.removeChild(li);
+                    let expensetext=li.textContent.trim();
+                    let stored=JSON.parse(localStorage.getItem('expenses'));
+                    let update=stored.filter(expense=>{
+                        return `${expense.amount}:${expense.description}:${expense.category}` !== expensetext
+                    });
+                    localStorage.setItem('expenses',JSON.stringify(update));
+                }
+            }
+            else if(e.target.classList.contains('edit')){
+                let li=e.target.parentElement;
+                let expensetext=li.textContent.trim();
+                let expensepart=expensetext.split(':');
+                amtinput.value=expensepart[0];
+                desinput.value=expensepart[1];
+                catinput.value=expensepart[2];
+                expenseslist.removeChild(li);
+            }
+        })
+        var filterInput = document.querySelector('#filter');
+        filterInput.addEventListener('input', filteritems);
+        function filteritems(e){
+        var text=e.target.value.toLowerCase();
+        var items=expenseslist.getElementsByTagName('li');
+        Array.from(items).forEach(function(item){
+            var itemname=item.firstChild.textContent;
+            if(itemname.toLowerCase().indexOf(text)!=-1){
+            item.style.display='block';
+            }
+            else{
+            item.style.display='none';
+            }
+        });
+        }  
+    </script>
+</body>
+</html>

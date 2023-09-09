@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>details</title>
+</head>
+<body>
+    <h1>Details</h1>
+    <form id="task_form">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname" placeholder="john"><br><br><!--TEXT-->
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="18" max="60"><br><br>
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male"><!--RADIO-->
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br><br>
+        <label for="bday">Bday:</label>
+        <input type="date" id="bday" name="bday"><br><br>
+        <label for="'datemin">Datemin:</label>
+        <input type="date" id="datemin" name="datemin" min="1999-17-05"><br><br>
+        <label for="datemax">Datemax:</label>
+        <input type="date" id="datemax" name="datemax" max="2023-17-05"><br><br>
+        <label for="bdaytime">bday&time:</label>
+        <input type="datetime-local" id="bdaytime" name="bdaytime"><br><br>
+        <label for="badymonth">month&year:</label>
+        <input type="month" id="badymonth" name="badymonth"><br><br>
+        <label for="appt">Select time for appointment:</label>
+        <input type="time" id="appt" name="appt"><br><br>
+        <label for="week">select week:</label>
+        <input type="week" id="week" name="week"><br><br>
+        <label for="linkdln">Link:</label>
+        <input type="url" id="linkdln" name="linkdln"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label>Fav_Subject:</label>
+        <input type="checkbox" id="math" name="subject" value="math"><!--CHECKBOX-->
+        <label for="math">Maths</label>
+        <input type="checkbox" id="science" name="subject" value="science">
+        <label for="science">Science</label>
+        <input type="checkbox" id="social" name="subject" value="social">
+        <label for="social">Social</label>
+        <input type="checkbox" id="english" name="subject" value="english">
+        <label for="english">English</label><br><br>
+        <label for="sight">Eye-Sight:</label>
+        <input type="range" id="sight" name="sight" min="0" max="1.5"><br><br>
+        <label for="phone">Phone_no.:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}"><br><br>
+        <label for="hobbies">Choose ur hobbies:</label>
+        <select id="hobbies" name="hobbies"  size="2" multiple><!--SELECT,OPTIOS-->
+            <option value="reading">Reading</option>
+            <option value="music" selected>Music</option>
+            <option value="writing">Writing</option>
+            <option value="movies">Movies</option>
+            <option value="driving">Driving</option>
+            <option value="horse riding">Horse Riding</option>
+            <option value="travelling">Travelling</option>
+            <option value="journaling">Journaling</option>
+        </select><br><br>
+        <label>tell something about urself:</label><br><br>
+        <textarea name="message" rows="10" cols="30"></textarea><br><br><!--TEXTAREA-->
+        <fieldset>
+            <legend>eductional qualification:</legend>
+            <label for="school">School name:</label>
+            <input type="text" id="school" name="school"><br><br>
+            <label for="intermediate">Inter college name:</label>
+            <input type="text" id="intermediate" name="intermediate"><br><br>
+            <label for="collge">Collge name:</label>
+            <input type="text" id="collge" name="college"><!--FIELDSET,LEGEND-->
+        </fieldset><br>
+        <button type="button" onclick="alert('hi')">Click Me!</button><br><br><!--BUTTON-->
+        <label for="browser">Favorite Browser:</label>
+        <input list="browsers" name="browser"><!--LIST,DATALIST-->
+        <datalist id="browsers">
+            <option value="intenet explorer">Internet Explorer</option>
+            <option value="firefox"></option>
+            <option value="chrome"></option>
+            <option value="opera"></option>
+            <option value="safari"></option>
+        </datalist>
+        <input type="submit"><br><br><!--SUBMIT-->
+        <label for="favcolor">Fav_Color:</label>
+        <input type="color" id="favcolor" name="favcolor" value="#FF0000"><br><br>
+        <label for="pwd">password:</label>
+        <input type="password" id="pwd" name="pwd" maxlength="9"><br><br>
+        <input type="image" src="img_submit.gif" alt="submit" width="48" height="48"><br><br>
+        <label for="myfile">select a file:</label>
+        <input type="file" id="myfile" name="myfile"><br><br>
+        <label for="custid">CustId:</label>
+        <input type="hidden" id="custid" name="custid" value="170599"><br><br>
+        <label for="gsearch">Google Search:</label>
+        <input type="search" id="gsearch" name="gsearch">
+    </form>
+</body>
+</html>

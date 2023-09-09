@@ -1,4 +1,4 @@
-/*
+
 //SCOPE OF A VARIABLE//
 function a(){
     console.log(b);
@@ -7,7 +7,7 @@ var b=10;
 a();//prints 10
 
 
-
+//...new codes...//
 function a(){
     c();
     function c(){
@@ -18,6 +18,7 @@ var b=10;
 a();//prints 10
 
 
+//...new codes...//
 function a(){
     var b=10;
     c();
@@ -28,6 +29,7 @@ function a(){
 a();//prints 10
 
 
+//...new codes...//
 function a(){
     var b=10;
     c();
@@ -43,30 +45,30 @@ console.log(b);//b is not defined
 //LEXICAL ENVIRONMENT//
 
 //TEMPORAL DEAD ZONE//
-//console.log(a);//reference error bcuz value isnt yet inalised and the variable is in the temporal dead zone
+//console.log(a);//reference error bcuz value isnt yet initialised and the variable is in the temporal dead zone
 let a=10;//scope is in the script....let and const would be allocated memory which is called as hoisting but they are stored in a different memory space than global and we cant access them before putting a value in them
 
-
-//var a=100;//scope is in the global space as the variable would be attached to the global object which could b accessed using window or this in console 
-let a=100;//throughs a syntax error=>doent code asingle line of code if double initialisation takes place and directly throughs error
+//...new codes...//
+//var a=100;//scope is in the global space as the variable would be attached to the global object which could b accessed using 'window' or 'this' in console 
+let a=100;//throughs a syntax error=>doesnt code a single line of code if syntax error takes place and directly throughs error
 console.log('hi');//throghs syntax error bcuz if double declaration
 //above syntax error only if declaration is using let instead of var
 
-
+//...new codes...//
 console.log('hi');
 let a=10;
 var a=100;
 
-
+//...new codes...//
 console.log('hi');//prints hi
 var a=10;
 var a=100;
 console.log(a);//prints 100
 
-
+//...new codes...//
 let a;
 const b=1000;
-a=10;//perfectly prints the assigned value
+a=10;//perfectly prints the assigned value as a is declared only once
 console.log(a);
 
 
@@ -121,7 +123,7 @@ console.log(window.a);
 console.log(this.a);
 console.log(window.c);
 console.log(this.c);
-//window and this key words are only usable to access if variable is declared using var
+//window and this key words are only usable to access if variable is declared using var(variable would be in the global scope)
 
 
 //ITERATE THROUGH OBJECT IN JS//
@@ -144,26 +146,30 @@ b.forEach(key=>{
 
 
 //FOREACH() Vs. MAP//
-//forEach()
-var nums=[2,3,4,7].forEach(logarr);
-function logarr(element,index,array){
-    console.log('arr['+index+']='+element*2);
-}
-
-//map():new array is given
-modified=[2,3,4,7].map(double);
+//forEach():perform an action on each item in a collection but doesnt returns anything so nums will remain as undefined
+var modified=[2,3,4,7].forEach(double);
 function double(ele,index,arr){
-    console.log('arr['+index+']='+ele*2);
+    console.log('arr['+index+']='+ele*2);//arr[0]=4,arr[1]=6,arr[2]=8,arr[3]=14
     return ele*2;
 }
+console.log(modified);//undefined
+//map():new array is given:lets u transform each item in a collection and creates a new collection with the tranformed values
+modified=[2,3,4,7].map(double);
+function double(ele,index,arr){
+    console.log('arr['+index+']='+ele*2);//arr[0]=4,arr[1]=6,arr[2]=8,arr[3]=14
+    return ele*2;
+}
+console.log(modified);//[4,6,8,14]
 
+
+//COMPOUND STATEMENT OR BLOCK({}) AND ITS USAGE//
 {
     //compound statement or BLOCK({})
     var a=10;
     console.log(a);
 }
 if(true)//syntax error cuz it expects a statement here
-if(true)console.log('hi);//single statement
+if(true)console.log('hi');//single statement
 if(true)true;//it can be directly used like this if we only have one statement to use but if  we have multiple statements=>
 
 if(true){
@@ -171,13 +177,13 @@ if(true){
     var a=10;
     console.log(a)
 }//two statements are grouped in a compound statement to represent them as a single statement
-//normally if expects a single statement beside it
+//normally 'if' expects a single statement beside it
 
 
 //BLOCK SCOPE:all the variables we can access inside the block=>block scope
 {
-    var a=10;//var is hoisted inside the global memory space even if it is declared inside  the block
-    let b=20;//let and const are hoisted inside a separate memory space block scope
+    var a=10;//var is hoisted inside the global memory space even if it is declared inside  the block:GLOBAL SCOPE
+    let b=20;//let and const are hoisted inside a separate memory space block scope:SCRIPT SCOPE
     const c=30;
     console.log(a);
     console.log(b);
@@ -232,21 +238,25 @@ var a=20;
     var a =20;
 }
 
+//...new codes...//
 let d=39;
 {
     let d=56;
 }
 
+//...new codes...//
 const h=45;
 {
     const h=58;
 }
 
+//...new codes...//
 var b=20;
 {
     let b =20;
 }
 
+//...new codes...//
 let c=20;
 {
     var c =20;//error:c is already declared=>illegal shadowing
@@ -276,11 +286,11 @@ function x(){
     var a=7;
     console.log(a);
     function y(){
-        console.log(a);//a's value is not stored here its just a reference to variable a
+        console.log(a);//a's value is not stored here its just a reference to variable a which would already be stored in the lexical/parent scope of the closure funciton y() 
     }
     return y;
-}
-var z=x();
+ }
+var z=x();//this is the closure function
 console.log(z);//y function closure along with the lexical scope of its parent is returned  and put inside z variable and x context is totally removed
 //..........
 z();//function when they were returned from another function they still maintains there lexical scope or where they were actually present
@@ -325,29 +335,15 @@ function z(){
 }
 z();
 
-when debugger is placed on console.log(a,b)
-closure (x) along with its parents variable a=7;
-closure (z) along with its parent variable b=900;
+//when debugger is placed on console.log(a,b)
+//closure (x) along with its parents variable a=7;
+//closure (z) along with its parent variable b=900;
 
 //even if the function y() is returned outside somewhere it would still retain these a,b memory locations
 
 
 //DIFFERENCE BETWEEN CALL, APPLY AND BIND//
 //CALL//
-var obj={
-    nums:2
-};
-
-
-var addtothis=function(a){
-
-    return this.nums+a;
-};
-
-console.log(addtothis.call(obj, 3));//5
-//functionname.call(obj,functionarguments)
-
-//APPLY.1//
 var obj={
     nums:2
 };
@@ -361,37 +357,9 @@ console.log(addtothis.call(obj,1,2,3));//8
 
 var arr=[1,2,3];//apply expects array format input only
 console.log(addtothis.apply(obj,arr));
-
-//2//
-
-var obj1={nums:2};
-var obj2={nums:5};
-
-var addtothis=function(a,b,c){
-
-    return this.nums+a+b+c;
-};
-
-var arr=[1,2,3];
-console.log(addtothis.apply(obj1,arr));//8
-console.log(addtothis.apply(obj2,arr));//11
-
-//BIND//
-var obj={
-    nums:2
-};
-var addtothis=function(a,b,c){
-
-    return this.nums+a+b+c;
-};
-var arr=[1,2,3];
-//console.log(addtothis.bind(obj,arr));
-//ƒ (a,b,c){return this.nums+a+b+c;}
-
 var bound=addtothis.bind(obj);
 //console.dir(bound)//ƒ bound addtothis()
 console.log(bound(1,2,3));//8
-
 
 //CALL FUNCTIONALITY//
 
@@ -404,20 +372,20 @@ let obj={
 };
 add.call(obj,3);
 
-//console.dir([]);
+//console.dir([]);//dir:provides the list of properties and more detailed information about the provided argument(properties and methods also);log:displays vlaue provided in the argument 
 //...new code...//
 let argstoarray=function(){
     //console.log(arguments);//gives back an object looking output but not an array
-    console.log([].slice.call(arguments));//borrowing array properties to turn the given input into an array
-};
-argstoarray(1,2,3)
+    console.log([].slice.call(arguments));//borrowing array properties(slice property of the array is borrowed by creating an empty array using [] and by using .slice funcitonality) to turn the given input into an array
+};//'arguments' variable holds all the values that were given when the function os called
+argstoarray(1,2,3);//code takes the value passed to the fucniton and converts them into an array like object using slice method borrowed from an empty array
 
 //...new code...//
 let mammal=function(legs){
     this.legs=legs;
 };
 let cat=function(legs,isdomesticated){
-    mammal.call(this,legs);
+    mammal.call(this,legs);//use 'this' keyword for object related code while using call or apply
     this.isdomesticated=isdomesticated;
 };
 let lion=new cat(4,false);
@@ -440,7 +408,6 @@ let newbutton=new button('add');
 
 //let looseclick=newbutton.click;
 //looseclick();//undefined clicked=>now it not bound
-
 
 let boundbutton=newbutton.click.bind(newbutton);
 boundbutton();//now its bound together
@@ -504,9 +471,9 @@ function x(){
             console.log(a);
         },a*1000);
        }
-       close(i);
+       close(i);//close function forms a closure with access to varibale 'a' from funciton 'x' even after 'x' has finished executing
     }
-    console.log('hi')//first prints hi then prints 6,5 times with 1 sec interval
+    console.log('hi')//first prints hi then prints 1-5 with 1 sec interval
 }
 x();
 
@@ -535,7 +502,7 @@ function a(){
 };
 a();
 
-//FUNCTION EXPRESSION//function acts like a value whuch we can initialise
+//FUNCTION EXPRESSION//function acts like a value which we can initialise
 var b=function (){
     console.log('b called');
 };
@@ -572,17 +539,18 @@ var i=function (param){
     console.log(param);
 }
 //two ways to pass a function inside another funciton
-i(function (){
-
-});
+function i(callback){
+    console.log('hi');
+    callback;//call the provided callback function
+};
 function j(){
-
+    console.log('ji');
 }
-i(j);
+i(j);//passing function j as an argument to function i
 //...new code..//
 var k=function (param1){
     return function (){
-
+        console.log('hi');
     }
 }
 console.log(k());
@@ -614,7 +582,7 @@ console.log(a());
 //CALL BACK FUNCTION IN JAVASCRIPT//functions are first class citizens in js=>u can take a function and pass it into another function, while doing that the function which is passed inside the another function is known as the  function.call back functions give us access to whole asynchronus world in a synchronous single threaded(single call stack) language
 //in simple terms CALLBACK:When something is done or an event happens, call this function 
 //bcuz of callback funcitons we can do async things inside javascript
-setTimeout(function z(){//asynchronous settimeout takes a callback function call back funciton z=>funciton z is passed on to settimeout and it is called sometime elese(5000 ms) in our program
+setTimeout(function z(){//asynchronous settimeout takes a callback function call back funciton z=>funciton z is passed on to settimeout and it is called sometime else(5000 ms) in our program
     console.log('timer')
 },5000)
 function x(y){
@@ -728,7 +696,7 @@ let multiply=function (x,y){
 }
 
 let multiplybytwo=multiply.bind(this,2);
-//upon calling bind method it creates a copey of the multiply funciton and it doesnt invoke it directly
+//upon calling bind method it creates a copy of the multiply funciton and it doesnt invoke it directly
 //above code is similar to:let multiplybytwo=function (y){
 //                             let x=2;
 //                             console.log(x*y);
@@ -765,7 +733,7 @@ let me={
 me.thisisarrow();
 me.thisisregular();
 
-//....cod eusing normal funciton .....//
+//....code using normal funciton .....//
 let me={
     name:"sree",
     age:26,
@@ -862,7 +830,7 @@ let arr2=[3,5];
 let arr4=[{d:8}];
 let arr3=[...arr1,...arr2,...arr4];
 console.log(arr3)
-*/
+
 console.log('a');
 
 console.log('b');

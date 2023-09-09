@@ -397,16 +397,17 @@ window.alert(1)//alert(1)
 
 console.log(document.getElementById('my-form'))
 
-console.log(document.querySelector('.container'))//container is a class name so '.' should be used
+console.log(document.querySelector('.container'))//container is a class name so '.' should be used and using query selector on classes makes it select the first item on the class name list
 
 console.log(document.querySelector('h1'))//h1 is a tag name so no need of '.'
 
+//Use a dot before a class name to find elements with that class, but don't use a dot when searching for elements by their HTML tag while using query selectors
 
 //MULTIPLE ELEMENT
 
-const items=document.querySelectorAll('.item');//node lists similar to arrays so we can use array methods on this
+const items=document.querySelectorAll('.item');//node lists similar to arrays so we can use array methods on this // dot(.) is used while indicating item class here to say 'find ele with specific class' 
 //generally query selectors are prefered over get element methods
-console.log(document.getElementsByClassName('item'))//gives a html collection not a node list
+console.log(document.getElementsByClassName('item'))//gives a html collection not a node list// dot(.) is not used while indicating item class in here it by default looks at only class names only
 
 items.forEach((item)=>console.log(item))
 
@@ -434,7 +435,7 @@ btn.addEventListener('click',(e)=>{//2 parts of addeventlistener when first part
 });
 
 
-const myform=document.querySelector('#my-form');
+const myform=document.querySelector('#my-form');//'#' is used while using query selector and selecting a single element with id 
 const nameinput=document.querySelector('#name');
 const emailinput=document.querySelector('#email');
 const msg=document.querySelector('.msg');
@@ -488,7 +489,7 @@ function onsubmit(e){
 
   users.forEach((user)=>{
     var li=document.createElement('li');
-    li.textContent`${user.name}:${user.email}`;
+    li.textContent=`${user.name}:${user.email}`;
     userlist.appendChild(li);
   });
 
@@ -537,7 +538,29 @@ function onsubmit(e){
     
     var str_obj=JSON.parse(localStorage.getItem('obj'));//now convert the memory of the local storage object string back to object
     //console.log(str_obj)
+    /*
+    getelebyid
+    getelebyclassname
+    getelebytagnam
+    queryselector
+    queryselectorall
+    innerhtml=>append+=,remove,modify,css styling,create 
+    append
+    createele
+    textcontent
+    .value
+    add
+    alert
+    addeventlistener
+    remove
+    settimeout
+    
+    local storage
+    session storage
+    cookies
+    document
+    window object
+    this keyword
 
-  
 
-
+    */
