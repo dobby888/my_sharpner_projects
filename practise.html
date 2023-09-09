@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const posts=[];
+        const user={
+            username:'sree',
+            lastactivitytime:'4:30pm, 9th of sep '
+        }
+        function createpost(user){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    posts.push(user);
+                    resolve("post created successfully");
+                },1000)
+            })
+        }
+
+
+        function updateLastUserActivityTime(){
+        return new Promise((resolve)=>{
+            setTimeout(()=>{
+                user.lastactivitytime=new Date().getTime();
+                resolve();
+            },1000)
+        })
+        }
+
+        function deletepost(){
+            return new Promise((resolve,reject)=>{
+                if(posts.length>0){
+                    posts.pop();
+                    resolve();
+                }else{
+                    reject('no posts are there to delete')
+                }
+            },1000)
+        }
+
+        function userupdatesapost(){
+            console.log('before creating post 4, user lastactivitytime:',user.lastactivitytime)
+            Promise.all([createpost(user),updateLastUserActivityTime()])
+            .then(([createpostresolves,updateLastUserActivityTimeresolves])=>{
+                console.log('after creating post 4');
+                console.log('posts:',posts);
+                console.log('user last activity time:',user.lastactivitytime)
+            })
+            .catch(err=>console.log(err))
+        }
+        userupdatesapost();
+
+
+    </script>
+</body>
+</html>
