@@ -568,7 +568,8 @@ premovie().then((m)=>console.log(`person3:shows ${m}`));
 
 console.log('person4:shows ticket');
 console.log('person5:shows ticket');
-*/
+
+//async and await task//
 
 console.log('person1:shows ticket');
 console.log('person2:shows ticket');
@@ -634,9 +635,69 @@ const userupdatesapost=async ()=>{
         console.log('after creating post 4');
         console.log('posts:',posts);
         console.log('user last activity time:',user.lastactivitytime)
-    
+    -
     }catch(err){
         console.log(err)
     }
 }
 userupdatesapost();
+
+
+//UNDERSTANDING PROMISES A LITTELE BETTER//
+//promises are asynchronuous 
+//promises may be "fullfilled(resolve)" but there is a chance for "rejection"(if not handled correctly=>errors)
+//promise is a class and it takes a callback funciton as an input
+//when we use "=" it would become a synchronous and should be executed immediately.but, promise is an asynchronous task so it prints a promise with a "pending" and we need to wait some time to get executed/completed===>use asyn await 
+async function dadmakespromise(){
+try{
+    const a=1;
+    const dadspromise=await new Promise((resolve,reject)=>{//if we dont use await it wont wait for the compiler to complete the promise and directly prints the values
+        setTimeout(()=>{
+            //after 1s
+        var salarycredited=true;
+        var salary=4000
+        var costofps4=30000
+        var costofps5=40000
+    
+        if(salarycredited===true && salary>costofps5){
+            resolve('buy him a ps5')
+        }else if(salarycredited===true && salary>costofps4){
+            reject({success:false, message:'should i buy u a ps4 instead'})//if(salary>ps4 cost)===>reject({object})
+        }else{
+            reject('sorry,ill try to buy it next month')//right now we dont have reject(error) handling(catch) so if the case is rejected w ewill be facing a erro
+        }
+        },1000) 
+  })//await only works inside a async function and  it only works for promises
+  console.log(dadspromise)
+}catch(err){
+    console.log(err);//if(salary<cost)==>sorry,ill try to buy it next month
+}
+    
+}
+dadmakespromise();//dad willl buy him a ps5 after 1s(imagine 10 days)
+//if we dont give resolve then it stopd in that certain step and dont proceed to the next step==>in the below example if we dont use res(only using console.log) for booting the ps it would stop at that point and donesnt continue to playing
+*/
+
+//rpoblems in js solved by js//
+async function playsation(){
+    console.log('a');
+    console.log('b');
+    const message1=await new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve('buying a ps')},1000)
+    })
+    console.log(message1);
+    const message2=await new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log('booting the ps')
+            resolve('booting successful')
+        },500);
+    })
+    console.log('message2>>>>',message2)
+    console.log('playing')
+
+}
+playsation();
+
+
+
+

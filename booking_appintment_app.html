@@ -140,6 +140,9 @@
         .then((response)=>{
           const users=response.data;
           addusers(users);
+          for(var i=0;i<response.lenght;i++){
+            addusers(response.data)
+          }
         })
         .catch((err)=>{
           console.log(err);
