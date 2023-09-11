@@ -113,53 +113,75 @@
         <li class="item">Item 3</li>
       </ul>-->
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
     <script>
       
-const myform=document.querySelector('#my-form');
-const nameinput=document.querySelector('#name');
-const emailinput=document.querySelector('#email');
-const msg=document.querySelector('.msg');
-const userlist=document.querySelector('#users');
+      const myform=document.querySelector('#my-form');
+      const nameinput=document.querySelector('#name');
+      const emailinput=document.querySelector('#email');
+      const msg=document.querySelector('.msg');
+      const userlist=document.querySelector('#users');
 
-var users=JSON.parse(localStorage.getItem('users')) || [];
+      var users=[];
 
-users.forEach((user)=>{
-  var li=document.createElement('li');
-  li.textContent`${user.name}:${user.email}`;
-  userlist.appendChild(li);
-});
+      function addusers(users){
+        userlist.innerHTML='';
+        users.forEach(user => {
+            const li=document.createElement('li');//adding new user to userlist
+            li.textContent=`${user.name}:${user.email}`;
+            userlist.appendChild(li);//appending li to userlist ele; append function adds ele/content to an existing ele in html
+            //overall the above code takes the values entered by user as name and email,combines them into a string,creates a new list item and adds this list item to userlist in the html document
+            //appendchild adds a new html ele as a child of an existing html ele
 
-myform.addEventListener('submit',onsubmit);//upon clicking submit button onsubmit function takes place
+        });
+      }
+      function getusers(){
+        axios.get('https://crudcrud.com/api/2fe340ad68ab454bb4ab39bd6ab7c373/userData')
+        .then((response)=>{
+          const users=response.data;
+          addusers(users);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
 
-function onsubmit(e){
-    e.preventDefault();
-    console.log(nameinput.value)//adding .value will give u the value u entered in the web page
-    //if .value is not added then it will be giving u the actual input <input type="text" id="name">
-    if(nameinput.value==="" || emailinput.value===""){
-      alert('please enter fields');//alert msg pops up
-     msg.classList.add('error');//error msg appears on the web page itself
-     msg.innerHTML='please enter all fields';//text in error msg
+      myform.addEventListener('submit',onsubmit);//upon clicking submit button onsubmit function takes place
 
-     setTimeout(()=>msg.remove(),3000)//error msg goes away after 3 seconds
-    }
-    else{
-      //adding the user input to an object
-      var user={
-        name:nameinput.value,
-        email:emailinput.value,
-      };
-      users.push(user);//pushing new user to users array
-      localStorage.setItem('users',JSON.stringify(users));//converting array/object into string
-      var li=document.createElement('li');//adding new user to userlist
-      li.textContent=`${user.name}:${user.email}`;
-      userlist.appendChild(li);//appending li to userlist ele; append function adds ele/content to an existing ele in html
-      //overall the above code takes the values entered by user as name and email,combines them into a string,creates a new list item and adds this list item to userlist in the html document
-      //appendchild adds a new html ele as a child of an existing html ele
-      
-      nameinput.value='';//reset the input fields to empty
-      emailinput.value='';
-    }
-  }
+      function onsubmit(e){
+          e.preventDefault();
+          //console.log(nameinput.value)//adding .value will give u the value u entered in the web page
+          //if .value is not added then it will be giving u the actual input <input type="text" id="name">
+          if(nameinput.value==="" || emailinput.value===""){
+            alert('please enter fields');//alert msg pops up
+          msg.classList.add('error');//error msg appears on the web page itself
+          msg.innerHTML='please enter all fields';//text in error msg
+
+          setTimeout(()=>msg.remove(),3000)//error msg goes away after 3 seconds
+          }
+          else{
+            //adding the user input to an object
+            var user={
+              name:nameinput.value,
+              email:emailinput.value,
+            };
+            users.push(user);//pushing new user to users array
+            axios.post('https://crudcrud.com/api/2fe340ad68ab454bb4ab39bd6ab7c373/userData',user)
+            .then((response)=>{
+              console.log(response)
+              getusers();
+            })
+            .catch((err)=>{
+              console.log(err)
+            })
+            
+            //localStorage.setItem('users',JSON.stringify(users));//converting array/object into string
+                        
+            nameinput.value='';//reset the input fields to empty
+            emailinput.value='';
+          }
+        }
+        getusers();
     </script>
   </body>
 </html>
