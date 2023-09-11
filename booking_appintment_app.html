@@ -150,6 +150,10 @@
             edit.className='btn btn-primary btn-sm float-right edit';
             //append text node
             edit.appendChild(document.createTextNode('EDIT'));
+            edit.addEventListener('click',()=>{
+              const userid=user._id;
+              edititem(userid);
+            })
 
             //append button to li
             li.appendChild(edit);
@@ -173,7 +177,28 @@
               console.log(err)
             })
       }
-      
+      function edititem(_id){
+      //console.log(1)//in console it would just trigger the input even if the form is clicked on item list but we want that to happen only when 'X' is clicked
+      const newname=prompt("Enter the new name:");
+        const newemail=prompt("Enter the new email:");
+
+        if(newname && newemail){
+          // Create an object with the updated data.
+          const updateuser={
+            name:newname,
+            email:newemail,
+          };
+      axios
+      .put(`https://crudcrud.com/api/2fe340ad68ab454bb4ab39bd6ab7c373/userData/${_id}`,updateuser)
+      .then((response)=>{
+              console.log(response)
+              getusers();
+            })
+            .catch((err)=>{
+              console.log(err)
+            })
+      }
+    }
       function getusers(){
         axios.get('https://crudcrud.com/api/2fe340ad68ab454bb4ab39bd6ab7c373/userData')
         .then((response)=>{
