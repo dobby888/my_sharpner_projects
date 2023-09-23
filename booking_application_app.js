@@ -388,9 +388,7 @@ function onSubmit(e) {
 
 
 
-console.log(window)
 
-window.alert(1)//alert(1)
 
 
 //SINGLE ELEMENT
@@ -433,52 +431,7 @@ btn.addEventListener('click',(e)=>{//2 parts of addeventlistener when first part
     document.querySelector('body').classList.add('bg-dark');
     document.querySelector('.items').lastElementChild.innerHTML='<h1>hello</h1>'
 });
-
-
-const myform=document.querySelector('#my-form');//'#' is used while using query selector and selecting a single element with id 
-const nameinput=document.querySelector('#name');
-const emailinput=document.querySelector('#email');
-const msg=document.querySelector('.msg');
-const userlist=document.querySelector('#users');
-
-myform.addEventListener('submit',onsubmit);//upon clicking submit button onsubmit function takes place
-
-function onsubmit(e){
-    e.preventDefault();
-    console.log(nameinput.value)//adding .value will give u the value u entered in the web page
-    //if .value is not added then it will be giving u the actual input <input type="text" id="name">
-    if(nameinput.value==="" || emailinput.value===""){
-      alert('please enter fields');//alert msg pops up
-     msg.classList.add('error');//error msg appears on the web page itself
-     msg.innerHTML='please enter all fields';//text in error msg
-
-     setTimeout(()=>msg.remove(),3000)//error msg goes away after 3 seconds
-    }
-    else{
-      //console.log('success')
-      const li=document.createElement('li');//creates a new list item using tag names
-      li.appendChild(document.createTextNode(`${nameinput.value}:${emailinput.value}`));//DONOT FORGET to use backticks(`) instead of single quotes(') while using $
-      //createElment creates a new html ele and createTextNode adds text content into that ele dynamically(during runtime)
-      userlist.appendChild(li);//appending li to userlist ele; append function adds ele/content to an existing ele in html
-      //overall the above code takes the values entered by user as name and email,combines them into a string,creates a new list item and adds this list item to userlist in the html document
-      //appendchild adds a new html ele as a child of an existing html ele
-      
-      //add fields input to local storage
-      localStorage.setItem('name',nameinput.value);
-      localStorage.setItem('email',emailinput.value);
-      
-      //claer fields
-      nameinput.value='';//reset the input fields to empty
-      emailinput.value='';
-    }
-
-  }
-
-
-  //STORAGE METHODS IN AJVASCRIPT//
-
-
-  
+//STORAGE METHODS IN JAVASCRIPT// 
   const myform=document.querySelector('#my-form');
   const nameinput=document.querySelector('#name');
   const emailinput=document.querySelector('#email');

@@ -1,4 +1,3 @@
-/*
 const posts=[
     {title:'post one',body:'this is post one'},
     {title:'post two',body:'this is post two'}
@@ -480,7 +479,7 @@ console.log('person4:shows ticket');
 console.log('person5:shows ticket');
 
 
-//ABOVE COD EUSING ASYNC AWAIT=>we know that they happen one after another//
+//ABOVE CODE USING ASYNC AWAIT=>we know that they happen one after another//
 console.log('person1:shows ticket');
 console.log('person2:shows ticket');
 
@@ -676,10 +675,10 @@ try{
 }
 dadmakespromise();//dad willl buy him a ps5 after 1s(imagine 10 days)
 //if we dont give resolve then it stopd in that certain step and dont proceed to the next step==>in the below example if we dont use res(only using console.log) for booting the ps it would stop at that point and donesnt continue to playing
-*/
+
 
 //rpoblems in js solved by js//
-async function playsation(){
+async function playstation(){
     console.log('a');
     console.log('b');
     const message1=await new Promise((resolve,reject)=>{
@@ -696,7 +695,7 @@ async function playsation(){
     console.log('playing')
 
 }
-playsation();
+playstation();
 
 
 

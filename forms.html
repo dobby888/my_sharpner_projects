@@ -8,90 +8,138 @@
 <body>
     <h1>Details</h1>
     <form id="task_form">
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="fname" placeholder="john"><br><br><!--TEXT-->
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" min="18" max="60"><br><br>
-        <label>Gender:</label>
-        <input type="radio" id="male" name="gender" value="male"><!--RADIO-->
-        <label for="male">Male</label>
-        <input type="radio" id="female" name="gender" value="female">
-        <label for="female">Female</label><br><br>
-        <label for="bday">Bday:</label>
-        <input type="date" id="bday" name="bday"><br><br>
-        <label for="'datemin">Datemin:</label>
-        <input type="date" id="datemin" name="datemin" min="1999-17-05"><br><br>
-        <label for="datemax">Datemax:</label>
-        <input type="date" id="datemax" name="datemax" max="2023-17-05"><br><br>
-        <label for="bdaytime">bday&time:</label>
-        <input type="datetime-local" id="bdaytime" name="bdaytime"><br><br>
-        <label for="badymonth">month&year:</label>
-        <input type="month" id="badymonth" name="badymonth"><br><br>
-        <label for="appt">Select time for appointment:</label>
-        <input type="time" id="appt" name="appt"><br><br>
-        <label for="week">select week:</label>
-        <input type="week" id="week" name="week"><br><br>
-        <label for="linkdln">Link:</label>
-        <input type="url" id="linkdln" name="linkdln"><br><br>
-        <label for="email">Email:</label>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newone</title>
+    <p>The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.</p>
+    <p>WWF's goal is to: <q>Build a future where people live in harmony with nature.</q></p>
+    <address style="border:2px solid red;">
+        Written by John Doe.<br>
+        Visit us at:<br>
+        Example.com<br>
+        Box 564, Disneyland<br>
+        USA
+    </address>
+    <bdo dir="rtl">the scream</bdo>
+    <p>Choose your favorite Web language:</p>
+
+    <form id="form1">
+    <input type="radio" id="html" name="fav_language" value="HTML">
+    <label for="html">HTML</label><br>
+    <input type="radio" id="css" name="fav_language" value="CSS">
+    <label for="css">CSS</label><br>
+    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+    <label for="javascript">JavaScript</label>
+    </form>
+    <form oninput="x.value=parseInt(a.value)*parseInt(b.value)">
+        <input type="range" id="a" name="a">
+        +
+        <input type="number" id="b" name="b">
+        =
+        <output name="x" for="a b"></output>
+        <button type="button" onclick="document.getElementById('demo').innerHTML=Date()">click:</button>
+        <p id="demo"></p>
+        <input type="button" value="button"><br><br>
+        <input type="submit" value="submission"><br><br>
+        <!--MULTIPLE:WORKS FOR EMAIL AND FILE INPUT TYPES ONLY-->
+        <!--COLOR-->
+        <label for="fav">select color:</label>
+        <input type="color" id="fav" name="fav_color"><br><br>
+        <!--DATE-->
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday"><br><br>
+        <!--MAX AND MIN:NUMBER,RANGE,DATE,DATETIME-LOCAL,MONTH,TIME,WEEK-->
+        <label for="datemax">Enter a date before 1980-01-01:</label>
+        <input type="date" id="datemax" name="datemax" max="1979-12-31"><br><br>
+        <label for="datemin">Enter a date after 2000-01-01:</label>
+        <input type="date" id="datemin" name="datemin" min="2000-01-02"><br><br>
+        <!--DATE AND TIME(NO TIME ZONE)-->
+        <label for="birthdaytime">Birthday (date and time):</label>
+        <input type="datetime-local" id="birthdaytime" name="birthdaytime"><br><br>
+        <!--MAIL ID-->
+        <label for="email">Enter your email:</label>
         <input type="email" id="email" name="email"><br><br>
-        <label>Fav_Subject:</label>
-        <input type="checkbox" id="math" name="subject" value="math"><!--CHECKBOX-->
-        <label for="math">Maths</label>
-        <input type="checkbox" id="science" name="subject" value="science">
-        <label for="science">Science</label>
-        <input type="checkbox" id="social" name="subject" value="social">
-        <label for="social">Social</label>
-        <input type="checkbox" id="english" name="subject" value="english">
-        <label for="english">English</label><br><br>
-        <label for="sight">Eye-Sight:</label>
-        <input type="range" id="sight" name="sight" min="0" max="1.5"><br><br>
-        <label for="phone">Phone_no.:</label>
-        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}"><br><br>
-        <label for="hobbies">Choose ur hobbies:</label>
-        <select id="hobbies" name="hobbies"  size="2" multiple><!--SELECT,OPTIOS-->
-            <option value="reading">Reading</option>
-            <option value="music" selected>Music</option>
-            <option value="writing">Writing</option>
-            <option value="movies">Movies</option>
-            <option value="driving">Driving</option>
-            <option value="horse riding">Horse Riding</option>
-            <option value="travelling">Travelling</option>
-            <option value="journaling">Journaling</option>
-        </select><br><br>
-        <label>tell something about urself:</label><br><br>
-        <textarea name="message" rows="10" cols="30"></textarea><br><br><!--TEXTAREA-->
-        <fieldset>
-            <legend>eductional qualification:</legend>
-            <label for="school">School name:</label>
-            <input type="text" id="school" name="school"><br><br>
-            <label for="intermediate">Inter college name:</label>
-            <input type="text" id="intermediate" name="intermediate"><br><br>
-            <label for="collge">Collge name:</label>
-            <input type="text" id="collge" name="college"><!--FIELDSET,LEGEND-->
-        </fieldset><br>
-        <button type="button" onclick="alert('hi')">Click Me!</button><br><br><!--BUTTON-->
-        <label for="browser">Favorite Browser:</label>
-        <input list="browsers" name="browser"><!--LIST,DATALIST-->
-        <datalist id="browsers">
-            <option value="intenet explorer">Internet Explorer</option>
-            <option value="firefox"></option>
-            <option value="chrome"></option>
-            <option value="opera"></option>
-            <option value="safari"></option>
-        </datalist>
-        <input type="submit"><br><br><!--SUBMIT-->
-        <label for="favcolor">Fav_Color:</label>
-        <input type="color" id="favcolor" name="favcolor" value="#FF0000"><br><br>
-        <label for="pwd">password:</label>
-        <input type="password" id="pwd" name="pwd" maxlength="9"><br><br>
-        <input type="image" src="img_submit.gif" alt="submit" width="48" height="48"><br><br>
-        <label for="myfile">select a file:</label>
+        <!--IMAGE-->
+        <!--<input type="image" src="img_submit.gif" alt="alternative_title_for_the_image" width="48" height="48"><br><br>-->
+        <!--ADDING A FILE FROM THE PC TO THE HTML FILE-->
+        <label for="myfile">Select a file:</label>
         <input type="file" id="myfile" name="myfile"><br><br>
-        <label for="custid">CustId:</label>
-        <input type="hidden" id="custid" name="custid" value="170599"><br><br>
-        <label for="gsearch">Google Search:</label>
-        <input type="search" id="gsearch" name="gsearch">
+        <!--HIDDEN-->
+        <input type="hidden" id="custId" name="custId" value="3487">
+        <input type="submit" value="Submit">
+        <!--MONTH AND YEAR-->
+        <label for="bdaymonth">Birthday (month and year):</label>
+        <input type="month" id="bdaymonth" name="bdaymonth"><br><br>
+        <!--MAX AND MIN RANGE-->
+        <label for="quantity">Quantity (between 1 and 5):</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="5"><br><br>
+        <!--MAX AND MIN RANGE AND INTERVAL(STEP) BETWEEN THE RANGE;STEP:NUMBER,RANGE,DATE,DATETIME-LOCAL,MONTH,TIME,WEEK-->
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="0" max="100" step="10" value="30"><br><br>
+        <!--RANGE IN VOLUME OR BAR-->
+        <label for="vol">Volume (between 0 and 50):</label>
+        <input type="range" id="vol" name="vol" min="0" max="50"><br><br>
+        <!--GOOGLE SEARCH-->
+        <label for="gsearch">Search Google:</label>
+        <input type="search" id="gsearch" name="gsearch"><br><br>
+        <!--PHONE NUMBER WITH THE PATTERN([0-9]{10}==>10 NUMBERS RANGED BETWEEN 0 AND 9,if doesnt match this format==>please match this format alertappears)-->
+        <label for="phone">Enter your phone number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}"><br><br>
+        <!--PATTERN:WORKS ONLY FOR TEXT,DATE,SEARCH,URL,TEL,EMAIL,PASSWORD;USE  GLOBAL TITLE ATT. TO DESCRIBE PATTERN TO HELP THE USERS-->
+        <label for="country_code">Country code:</label>
+        <input type="text" id="country_code" name="country_code" pattern="[A-Za-z]{3}" title="Three letter country code">
+        <!--TIME(NO TIME ZONE)-->
+        <label for="appt">Select a time:</label>
+        <input type="time" id="appt" name="appt"><br><br>
+        <!--URL-->
+        <label for="homepage">Add your homepage:</label>
+        <input type="url" id="homepage" name="homepage"><br><br>
+        <!--WEEK-->
+        <label for="week">Select a week:</label>
+        <input type="week" id="week" name="week"><br><br>
+        <!--INPUT ATTRIBUTES-->
+        <!--READONLY:CANT MODIFY,SENT WHILE SUBMITTING THE FORM-->
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname" value="John" readonly><br><br>
+        <!--DISABLED:UNUSUABLE AND CANT BE SENT WHIKE SUBMITTING THE FORM-->
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname" value="John" disabled><br><br>
+        <!--SIZE:VISIBLE INPUT FIELD SIZE(DEFAULT=20):TEXT,SEARCH,TEL,URL,EMIAL,PASSWORD-->
+        <label for="pin">PIN:</label>
+        <input type="text" id="pin" name="pin" size="4"><br><br>
+        <!--MAXLENGTH:MAX CAHR ALLOWED IN AN INPUT FIELD-->
+        <label for="pin">PIN:</label>
+        <input type="text" id="pin" name="pin" maxlength="4" size="4"><br><br>
+        <!--PLACEHOLDER:TEXT,SEARCH,TEL,URL,EMAIL,PASSWORD-->
+        <label for="phone">Enter a phone number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{10}"><br><br>
+        <!--REQUIRED:MANDATORY;TEXT,SEARCH,TEL,URL,EMAIL,PASSWORD,DATE PICKERS,NUMBER,CHECKBOX,RADIO,FILE-->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <!--AUTOFOCUS-->
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" autofocus><br><br>
+     </form>
+     <!--FORM ATTRIBUTES-->
+     <!--ALL THE FORM ATTRIBUTES OVERRIDES THE ACTION ATTRIBUTE IN THE FORM ELEMENT AND THEY WORKS FOR SUBMIT AND IMAGE INPUT TYPES ONLY -->
+     <!--FORM ATTRIBUTE:INPUTNFIELD OUTSIDE OF HTML FORM(BUT STILL A PART OF THE FORM;value of this attribute=id attribute of the form ele it belongs to(form1))-->
+     <label for="lname">Last name:</label>
+     <input type="text" id="lname" name="lname" form="form1"><br><br>
+     <!--FORMACTION ATRRIBUTE:OVERRIDES THE ACTION ATTRIBUTE OF FORM ELE:WORKS FOR SUBMIT AND IMAGE-->
+     <input type="submit" value="Submit">
+     <input type="submit" formaction="/action_page2.php" value="Submit as Admin"><br><br>
+     <!--FORMENCTYPE:HOW FORM DATE SHIULD BE ENCODED WHEN SUBMITTED(METHOD="POST" ONLY):OVERRIDES ACTION ATTRIBUTE IN FORM ELE:WORKS FOR SUBMIT AND IMAGE;encoded as "multipart/form-data"-->
+     <input type="submit" value="Submit">
+     <input type="submit" formenctype="multipart/form-data" value="Submit as Multipart/form-data"><br><br>
+     <!--FORMMETHOD:-->
+     <input type="submit" value="Submit using GET">
+     <input type="submit" formmethod="post" value="Submit using POST">
+     <!--FORMTARGET:-->
+     <input type="submit" value="Submit">
+     <input type="submit" formtarget="_blank" value="Submit to a new window/tab">
+     <!--NOVALIDATE:-->
+     <input type="submit" value="Submit">
+     <input type="submit" formnovalidate="formnovalidate" value="Submit without validation">
     </form>
 </body>
 </html>

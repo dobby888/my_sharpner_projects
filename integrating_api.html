@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery List</title>
+    <style>
+        /* Add some basic styling for better appearance */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grocery List</h1>
+
+    <!-- Input fields for adding a new grocery item -->
+    <input type="text" id="groceryName" placeholder="Enter Grocery">
+    <input type="number" id="groceryQuantity" placeholder="Enter Quantity">
+    <button onclick="addGrocery()">Add Grocery</button>
+
+    <!-- Display the grocery list -->
+    <h2>Grocery List</h2>
+    <ul id="groceryList">
+        <!-- Grocery items will be added here -->
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.js"></script>
+    <script>
+        // Initialize an empty grocery list
+        let groceries = [];
+
+        // Function to add a new grocery item to the list
+        function addGrocery() {
+            const name = document.getElementById("groceryName").value;
+            const quantity = document.getElementById("groceryQuantity").value;
+
+            if (name && quantity) {
+                // Create a new grocery object
+                const newGrocery = {
+                    name: name,
+                    quantity: quantity
+                };
+                
+                axios.post("https://crudcrud.com/api/6e9f204009ae463e90abc3c11a8a3b92/grocery_list", newGrocery)
+                .then(response => {
+                    console.log("Grocery added to API:", response.data);
+                    
+                    // Clear input fields
+                    document.getElementById("groceryName").value = "";
+                    document.getElementById("groceryQuantity").value = "";
+                    
+                    // Reload the grocery list from the API to include the newly added item
+                    loadGroceriesFromAPI();
+                })
+                .catch(error => {
+                    console.error("Error adding grocery to API:", error);
+                });
+            }
+        }
+
+        // Function to display the grocery list
+        function displayGroceryList() {
+            const groceryList = document.getElementById("groceryList");
+            groceryList.innerHTML = "";
+
+            // Loop through the groceries and create list items
+            groceries.forEach(function (grocery, index) {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${grocery.name} - Quantity: ${grocery.quantity}`;
+                
+                // Create buttons for buying, editing, and deleting
+                const buyButton = document.createElement("button");
+                buyButton.textContent = "Buy";
+                buyButton.addEventListener("click", function () {
+                    buyGrocery(index);
+                });
+
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit Quantity";
+                editButton.addEventListener("click", function () {
+                    editQuantity(index);
+                });
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", function () {
+                    deleteGrocery(index);
+                });
+
+                // Append buttons to the list item
+                listItem.appendChild(buyButton);
+                listItem.appendChild(editButton);
+                listItem.appendChild(deleteButton);
+
+                // Append the list item to the grocery list
+                groceryList.appendChild(listItem);
+            });
+        }
+
+        // Function to load the grocery list from the API
+        
+        function loadGroceriesFromAPI(){
+        axios.get('https://crudcrud.com/api/6e9f204009ae463e90abc3c11a8a3b92/grocery_list')
+        .then((response)=>{
+          groceries = response.data; // Update groceries with the data from the API
+          displayGroceryList(); // Display the updated list
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
+
+        // Function to save the grocery list to the API (PUT operation)
+        function saveGroceries() {
+
+            axios.put("https://crudcrud.com/api/6e9f204009ae463e90abc3c11a8a3b92/grocery_list", groceries)
+            .then(response => {
+                console.log("Groceries saved to API:", response.data);
+            })
+            .catch(error => {
+                console.error("Error saving groceries to API:", error);
+            });
+        }
+
+        // Function to handle buying a grocery
+        function buyGrocery(index) {
+            const boughtQuantity = prompt(`Enter the quantity of ${groceries[index].name} bought:`);
+            if (boughtQuantity !== null && !isNaN(boughtQuantity)) {
+                const remainingQuantity = groceries[index].quantity - parseInt(boughtQuantity);
+                if (remainingQuantity >= 0) {
+                    groceries[index].quantity = remainingQuantity;
+                    displayGroceryList();
+                    saveGroceries();
+                } else {
+                    alert("Invalid quantity. You cannot buy more than what's available.");
+                }
+            }
+        }
+
+        // Function to handle editing the quantity of a grocery
+        function editQuantity(index) {
+            const newQuantity = prompt("Enter additional quantity:");
+            if (newQuantity !== null && !isNaN(newQuantity)) {
+                groceries[index].quantity = parseInt(groceries[index].quantity) + parseInt(newQuantity);
+                displayGroceryList();
+                saveGroceries();
+            }
+        }
+
+        // Function to delete a grocery
+        function deleteGrocery(index) {
+            groceries.splice(index, 1);
+            displayGroceryList();
+            saveGroceries();
+        }
+
+        // Load initial data from the API when the page loads
+        loadGroceriesFromAPI();
+    </script>
+</body>
+</html>
